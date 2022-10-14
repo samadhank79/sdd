@@ -1,0 +1,127 @@
+*
+        	{
+        		
+        		box-sizing: border-box;
+        		font-family:'poppins', sans-serif;
+
+        	}
+        	.sticky-header
+        	{
+        		position: absolute;
+			    width: 100%;
+			    left: 0;
+			    top: 0;
+			    z-index: 999;
+        	}
+        	.nav-link
+			{
+			  font-size: 16px !important; 
+			  letter-spacing: 0.5px;
+			  color: #333333 !important;
+			  padding-right: 1rem !important;
+			  padding-left: 1rem !important;
+			}
+			.btn-sbtn
+			{
+				background: #fff;
+				border-color:#333333;
+				color: #000;
+				border-radius: 30px;
+				padding: 15px;
+			}
+			.btn-sbtn:hover
+			{
+				background: #3878ff;
+				border-color:#3878ff;
+				color: #fff;
+			}
+			.btn-logbtn
+			{
+				
+				background: #3878ff;
+				border-color:#3878ff;
+				color: #fff;
+				border-radius: 30px;
+				padding: 8px;
+			}
+			.btn-logbtn:hover
+			{
+				background: #fff;
+				border-color:#333333;
+				color: #000;
+			}
+			.form-control
+			{
+				border-radius: 30px !important;
+			}
+        	.ptb-70
+        	{
+        		padding-top: 70px;
+        		padding-bottom: 70px;
+        	}
+        	.banner
+        	{
+        		background: #ebf5ff; padding-top: 110px;
+        	}
+        	.bannercnt
+        	{
+        		padding-top: 160px;
+        	}
+        	.bannercnt h1 {
+			    font-size: 48px;
+			    color: #3878ff;
+			    font-weight: 600;
+			    line-height: 58px;
+			    margin-bottom: 30px;
+			    font-style: normal;
+			}
+			h2
+			{
+				font-size: 36px;
+				font-weight: 600;
+			}
+			ul li
+			{
+				list-style: none;
+			}
+			footer
+			{
+				padding: 20px 0;
+			}
+			.copyright
+			{
+				font-size: 15px;
+				margin-bottom: 0;
+			}
+			.footerlist
+			{
+				float: right;
+				margin-bottom: 0;
+			}
+			.footerlist li
+			{
+				margin-right: 10px;
+			}
+			.footerlist li a
+			{
+				color: #000;
+				font-size: 15px;
+			}
+			.list-style li:before {
+			    content: "\f058";
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    font-family: Font Awesome\ 5 Free;
+			    color: #3878ff;
+			    font-size: 18px;
+			}
+			.list-style li {
+			    position: relative;
+			    padding: 0 0 10px 30px;
+			    color: #000;
+			}
+			.loginpage
+			{
+				padding-top: 110px;padding-bottom: 80px;
+			}
