@@ -31,7 +31,7 @@ use App\Models\DbUser;
 
 
 
-Route::get('/',function(){
+Route::get('/admincredential',function(){
 
 	$user = DbUser::all();
 	foreach($user as $u){
@@ -50,13 +50,21 @@ Route::get('/',function(){
 		'designation' => 'Admin',
 		'status' => 'active',
 	]);
-});
+})->name('admincredential');
 
-Route::get('/activation ', [LandingController::class, 'Activation'])->name('activation');
-Route::post('/activation ', [LandingController::class, 'Activation'])->name('activation');
+Route::get('/', [LandingController::class, 'Verify'])->name('verify');
+// Route::post('/', [LandingController::class, 'Verify'])->name('verify');
+
+
+Route::get('/activation', [LandingController::class, 'Activation'])->name('activation');
+//Route::post('/activation', [LandingController::class, 'Activation'])->name('activation');
+
+
+
+
+//Expire Code ..
 
 Route::get('/login',[LandingController::class,'Login'])->name('login');
-
 Route::post('/login',[LandingController::class,'Login'])->name('login');
 Route::get('/register',[LandingController::class,'Register'])->name('register');
 Route::get('DataflowReportAdmin/{name}',[LandingController::class,'DataFlow'])->name('dataflow');

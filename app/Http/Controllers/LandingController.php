@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\DbRole;
 use App\Models\DbUser;
 use App\Models\DbUpsi;
+use App\Models\DbExpire;
 use App\Models\DbUpsiBackup;
 use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 class LandingController extends Controller
 {
     function Home(Request $request){
@@ -58,7 +62,7 @@ class LandingController extends Controller
         return view('DataFlow',compact('activeUpsi'));    
     }
     function ViewDataFlow(Request $request,$id){
-     if($request->session()->has('admin')){
+       if($request->session()->has('admin')){
         $s = $request->session()->get('admin');
     }elseif ($request->session()->has('users')) {
         $s = $request->session()->get('users');
@@ -108,12 +112,12 @@ function Login(Request $request){
 
 
 
-       $validator = Validator::make($request->all(), [
+     $validator = Validator::make($request->all(), [
         'email' => 'required|email|exists:db_users,email',
         'passwd' => 'required'
     ]);
 
-       if ($validator->fails()) {
+     if ($validator->fails()) {
         return back()->withErrors($validator)->withInput();
     } else {
 
@@ -210,16 +214,75 @@ function ChangePassword (Request $request){
     return view('ChangePassword');
 }
 
+public function verify(Request $request){
+    if($request->input('verify')){
+
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+
+            $email = $request->input('email');
+            $user = DbExpire::where('email',$email)->first();
+            if($user){
+
+                $registerdate = strtotime($user->registerdate);
+                $expirationdate = strtotime($user->expirationdate);
+                if(strtotime(date("Y/m/d"))< $expirationdate){
+                    return redirect()->route('admincredential');
+                }else{
+
+                    return redirect()->route('activation');
+                }
+            }else{
+
+                return redirect()->route('activation');
+
+                // return redirect()->back()->withInput($request->only('email'))->withErrors([
+                //     'email' => 'User Not Exist  or this account not Verified yet.',
+                // ]);
+            }
+        }
+
+
+}
+return view('verify');
+}
+
 public function Activation(Request $request)
 {
     if($request->input('activate')){
-        $name = $request->input('firstname');
-        $lastname = $request->input('lastname');
-        $email = $request->input('email')
+        // $expire = new DbExpire;
+        // $validator = Validator::make($request->all(), [
+        //     'firstname' => 'required',
+        //     'lastname' => 'required',
+        //     'email' => 'required|unique:db_expires',
+
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator)->withInput();
+        // } else {
+        //     return redirect()->route('verify');
+        // }
+
+        // return $email = $request->input('email');
+
+        // $expire->firstname = $request->input('firstname');
+        // $expire->lastname = $request->input('lastname');
+        // $expire->email = $request->input('email');
+        // $expire->registerdate  = date("Y/m/d");
+        // $expire->expirationdate   = date('Y/m/d', strtotime('+ 1 days'));
+        // $expire->save();
 
     }
     return view('Activation');
 }
+
 
 function Register(Request $request){
     $role =  DbRole::all();
